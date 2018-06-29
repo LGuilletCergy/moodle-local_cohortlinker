@@ -37,5 +37,5 @@ $string['subjectcontentmessage'] = 'Hello,<br>'
         . 'A new cohort {$a->cohortname} is available for your course {$a->coursename}.<br>'
         . 'You can link it to your course by following this url : {$a->linkurl}.<br>';
 $string['linkcohort'] = 'Link a cohort';
-$string['cohortlinker'] = 'Cohort linker';
+$string['pluginname'] = 'Cohort linker';
 $string['success'] = 'You have successfully linked the cohort.';

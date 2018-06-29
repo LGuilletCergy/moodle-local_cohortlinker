@@ -39,5 +39,5 @@ $string['subjectcontentmessage'] = 'Bonjour,<br>'
         . '<p>Bien cordialement,<br>'
         . 'CoursUCP, votre plateforme pédagogique.</p>';
 $string['linkcohort'] = 'Lier une cohorte';
-$string['cohortlinker'] = 'Lier des cohortes';
+$string['pluginname'] = 'Lier des cohortes';
 $string['success'] = 'Vous avez bien lié la cohorte.';
