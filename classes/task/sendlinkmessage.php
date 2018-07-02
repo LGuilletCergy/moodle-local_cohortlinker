@@ -46,9 +46,8 @@ class sendlinkmessage extends \core\task\scheduled_task {
 
         global $DB;
 
-        $sql = "SELECT * FROM {cohorts} WHERE id NOT IN "
-                . "(SELECT cohortid FROM {local_cohortlinker} WHERE 1)";
-
+        $sql = "SELECT * FROM {cohort} WHERE id NOT IN "
+                . "(SELECT cohortid FROM {local_cohortlinker} WHERE 1) AND idnumber NOT LIKE ''";
         $listcohortsnottreated = $DB->get_records_sql($sql);
 
         foreach ($listcohortsnottreated as $cohortnottreated) {
@@ -58,14 +57,20 @@ class sendlinkmessage extends \core\task\scheduled_task {
 
             foreach ($listlinkablecourses as $linkablecourse) {
 
-                $contextcourse = \context_course::instance($linkablecourse->id);
+                // Vérifier que la cohorte n'est pas lié au cours
 
-                $listteachersid = $DB->get_records('role_assignments',
-                        array('roleid' => 3, 'contextid' => $contextcourse->id))->userid;
+                if (!$DB->record_exists('enrol',
+                        array('enrol' => 'cohort', 'customint1' => $cohortnottreated->id))) {
 
-                foreach ($listteachersid as $teacherid) {
+                    $contextcourse = \context_course::instance($linkablecourse->id);
 
-                    send_link_message($teacherid, $linkablecourse, $cohortnottreated);
+                    $listteachers = $DB->get_records('role_assignments',
+                            array('roleid' => 3, 'contextid' => $contextcourse->id));
+
+                    foreach ($listteachers as $teacher) {
+
+                        send_link_message($teacher->userid, $linkablecourse, $cohortnottreated);
+                    }
                 }
             }
 
@@ -75,33 +80,33 @@ class sendlinkmessage extends \core\task\scheduled_task {
             $DB->insert_record('local_cohortlinker', $cohorttreated);
         }
     }
+}
 
-    public function send_link_message($teacherid, $course, $cohort) {
+function send_link_message($teacherid, $course, $cohort) {
 
-        global $CFG, $DB;
+    global $CFG, $DB;
 
-        require_once($CFG->dirroot.'/local/cohortlinker/notification.php');
+    require_once($CFG->dirroot.'/local/cohortlinker/notification.php');
 
-        $contact = core_user::get_support_user();
+    $contact = \core_user::get_support_user();
 
-        $url = new \moodle_url('/local/cohortlinker/linkpage.php',
-                array('courseid' => $course->id, 'cohortid' => $cohort->id));
+    $url = new \moodle_url('/local/cohortlinker/linkpage.php',
+            array('courseid' => $course->id, 'cohortid' => $cohort->id));
 
-        $data = new \stdClass();
-        $data->cohortname = $cohort->name;
-        $data->coursename = $course->name;
-        $data->linkurl = $url;
+    $data = new \stdClass();
+    $data->cohortname = $cohort->name;
+    $data->coursename = $course->fullname;
+    $data->linkurl = $url;
 
 
-        $subject = get_string('subjectlinkmessage', 'local_cohortlinker');
-        $content = get_string('contentlinkmessage', 'local_cohortlinker');
+    $subject = get_string('subjectlinkmessage', 'local_cohortlinker');
+    $content = get_string('contentlinkmessage', 'local_cohortlinker');
 
-        $teacher = $DB->get_record('user', array('id' => $teacherid));
+    $teacher = $DB->get_record('user', array('id' => $teacherid));
 
-        $message = new local_cohortlinker_notification($teacher, $contact, $subject, $content,
-                $url);
+    $message = new \local_cohortlinker_notification($teacher, $contact, $subject, $content,
+            $url);
 
-        message_send($message);
-    }
+//        message_send($message);
 }
 
