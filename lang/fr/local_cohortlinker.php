@@ -33,7 +33,7 @@
 
 $string['sendlinkmessage'] = 'Envoie un message aux enseignants pour lier les nouvelles cohortes.';
 $string['subjectlinkmessage'] = 'Nouvelle cohorte disponible';
-$string['subjectcontentmessage'] = 'Bonjour,<br>'
+$string['contentlinkmessage'] = 'Bonjour,<br>'
         . 'Une nouvelle cohorte {$a->cohortname} est disponible pour votre cours {$a->coursename}.<br>'
         . 'Vous pouvez la lier à votre cours en cliquant sur ce lien : {$a->linkurl}.<br>'
         . '<p>Bien cordialement,<br>'

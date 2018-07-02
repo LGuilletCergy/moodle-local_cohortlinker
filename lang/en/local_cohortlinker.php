@@ -33,7 +33,7 @@
 
 $string['sendlinkmessage'] = 'Send message to teacher to link new cohorts.';
 $string['subjectlinkmessage'] = 'New cohort available';
-$string['subjectcontentmessage'] = 'Hello,<br>'
+$string['contentlinkmessage'] = 'Hello,<br>'
         . 'A new cohort {$a->cohortname} is available for your course {$a->coursename}.<br>'
         . 'You can link it to your course by following this url : {$a->linkurl}.<br>';
 $string['linkcohort'] = 'Link a cohort';
