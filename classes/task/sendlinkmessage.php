@@ -90,8 +90,7 @@ function send_link_message($teacherid, $course, $cohort) {
 
     $contact = \core_user::get_support_user();
 
-    $url = new \moodle_url('/local/cohortlinker/linkpage.php',
-            array('courseid' => $course->id, 'cohortid' => $cohort->id));
+    $url = $CFG->wwwroot."/local/cohortlinker/linkpage.php?cohortid=$cohort->id&courseid=$course->id";
 
     $data = new \stdClass();
     $data->cohortname = $cohort->name;

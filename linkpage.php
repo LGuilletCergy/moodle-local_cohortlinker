@@ -33,6 +33,7 @@
 
 require_once("../../config.php");
 require_once("$CFG->dirroot/enrol/cohort/locallib.php");
+require_once("$CFG->dirroot/group/lib.php");
 
 $courseid = required_param('courseid', PARAM_INT);
 $cohortid = required_param('cohortid', PARAM_INT);
