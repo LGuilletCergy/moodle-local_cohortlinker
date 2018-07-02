@@ -107,6 +107,6 @@ function send_link_message($teacherid, $course, $cohort) {
     $message = new \local_cohortlinker_notification($teacher, $contact, $subject, $content,
             $url);
 
-//        message_send($message);
+    message_send($message);
 }
 
