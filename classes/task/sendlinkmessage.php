@@ -57,7 +57,7 @@ class sendlinkmessage extends \core\task\scheduled_task {
 
             foreach ($listlinkablecourses as $linkablecourse) {
 
-                // Vérifier que la cohorte n'est pas lié au cours
+                // Vérifier que la cohorte n'est pas liée au cours.
 
                 if (!$DB->record_exists('enrol',
                         array('enrol' => 'cohort', 'customint1' => $cohortnottreated->id))) {
@@ -96,7 +96,6 @@ function send_link_message($teacherid, $course, $cohort) {
     $data->cohortname = $cohort->name;
     $data->coursename = $course->fullname;
     $data->linkurl = $url;
-
 
     $subject = get_string('subjectlinkmessage', 'local_cohortlinker');
     $content = get_string('contentlinkmessage', 'local_cohortlinker', $data);

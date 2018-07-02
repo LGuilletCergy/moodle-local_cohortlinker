@@ -34,14 +34,19 @@
 namespace local_cohortlinker\privacy;
 use core_privacy\local\metadata\collection;
 
+defined('MOODLE_INTERNAL') || die;
+
 class provider implements
-        // This plugin does store personal user data.
-        \core_privacy\local\metadata\provider {
+    // This plugin does not store any personal user data.
+    \core_privacy\local\metadata\null_provider {
 
-    public static function get_metadata(collection $collection) : collection {
-
-        // Here you will add more items into the collection.
-
-        return $collection;
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
     }
 }

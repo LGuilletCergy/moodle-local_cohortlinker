@@ -41,3 +41,4 @@ $string['contentlinkmessage'] = 'Bonjour,<br>'
 $string['linkcohort'] = 'Lier une cohorte';
 $string['pluginname'] = 'Lier des cohortes';
 $string['success'] = 'Vous avez bien lié la cohorte.';
+$string['privacy:metadata'] = 'Le plugin n\'enregistre qu\'une liste de cohortes.';
