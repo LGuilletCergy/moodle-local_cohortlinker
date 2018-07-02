@@ -38,7 +38,7 @@ class local_cohortlinker_notification extends \core\message\message {
     public function __construct($to, $from, $subject, $content, $url) {
 
         $this->component = 'local_cohortlinker';
-        $this->name = 'linkmessage';
+        $this->name = 'newcohort';
         $this->smallmessage = get_string('subjectlinkmessage', 'local_cohortlinker');
         $this->userfrom = $from;
         $this->userto = $to;
