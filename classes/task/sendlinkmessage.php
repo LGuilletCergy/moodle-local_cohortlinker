@@ -100,7 +100,7 @@ function send_link_message($teacherid, $course, $cohort) {
 
 
     $subject = get_string('subjectlinkmessage', 'local_cohortlinker');
-    $content = get_string('contentlinkmessage', 'local_cohortlinker');
+    $content = get_string('contentlinkmessage', 'local_cohortlinker', $data);
 
     $teacher = $DB->get_record('user', array('id' => $teacherid));
 
