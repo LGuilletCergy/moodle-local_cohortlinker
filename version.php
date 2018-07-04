@@ -33,6 +33,6 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2018070401;
+$plugin->version = 2018070402;
 $plugin->requires = 2015051100;
 $plugin->component = 'local_cohortlinker';
